@@ -1,0 +1,44 @@
+<%-- 
+    Document   : yhjsp1
+    Created on : Jan 21, 2016, 9:29:51 PM
+    Author     : Sirisha
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+<%@ page import ="java.sql.*" %>
+<%-- requesting the parameters i.e., attributes of gasreceipt table --%>
+<%
+    
+    String Employee_ID = request.getParameter("Employee_ID");
+    String Vehicle_ID = request.getParameter("Vehicle_ID");
+    String Vehicle_mileage = request.getParameter("Vehicle_mileage");
+    String Price_per_gallon = request.getParameter("Price_per_gallon");
+    String Total_purchase_price = request.getParameter("Total_purchase_price"); 
+    String Number_of_gallons_purchased = request.getParameter("Number_of_gallons_purchased");
+    String Picture_of_odometer = request.getParameter("Picture_of_odometer");
+    String Picture_of_Receipt = request.getParameter("Picture_of_Receipt");
+    String Uploaded_at = request.getParameter("Uploaded_at");
+//connecting to the mysql database which has GasReceipt table
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghas",
+            "root", "pwd");
+    
+    Statement st = con.createStatement();
+    ResultSet rs;
+        //inserting data using insert command and to obtain chronological order used order by desc
+    
+    int i = st.executeUpdate("insert into gasreceipt(Employee_ID, Vehicle_ID, Vehicle_mileage, Price_per_gallon, Total_purchase_price,Number_of_gallons_purchased,Picture_of_odometer,Picture_of_Receipt) values ('" + Employee_ID + "','" + Vehicle_ID + "','" + Vehicle_mileage + "','" + Price_per_gallon + "','" + Total_purchase_price  + "','" + Number_of_gallons_purchased + "','" + Picture_of_odometer + "','" + Picture_of_Receipt + "' )");
+    if (i > 0) {
+  
+      // redirecting the page to the details adding page
+         
+        response.sendRedirect("yhhtml.jsp");
+       
+    } else {
+        response.sendRedirect("index.html");
+    }
+%>
+
+ 
