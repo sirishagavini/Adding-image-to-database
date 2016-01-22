@@ -22,7 +22,7 @@
     String Uploaded_at = request.getParameter("Uploaded_at");
 //connecting to the mysql database which has GasReceipt table
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghas",
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yhdw",
             "root", "pwd");
     
     Statement st = con.createStatement();
