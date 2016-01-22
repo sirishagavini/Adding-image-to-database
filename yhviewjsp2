@@ -1,0 +1,161 @@
+<%-- 
+    Document   : yhviewjsp2
+    Created on : Jan 21, 2016, 10:01:54 PM
+    Author     : Sirisha
+--%>
+<!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%@ page import="java.io.*"%>
+ <%@ page import="java.sql.*"%>
+
+
+
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
+           <title>YORKHOIST</title>
+    </head>
+    <div style=" background-color:#e6b800; color:black; padding:5px; "> <table> <tr> <td> <img src="imageresource/yorkhoistcrane.jpg" height="120" width="170" > </td> <td><p> <font size="10"> &nbsp; &nbsp;&nbsp; &nbsp; <b> YORK HOIST </p> </td> <td> <p> <font size="4"> &nbsp; &nbsp; <b> Contact us: (123)456-8907 <br> &nbsp; &nbsp; <b> email: york@hoist.com </tr>
+        </table> </div>
+ <body>
+     <table width="100%">
+<tr> 
+<td> <div style=" background-color:#e6b800; color:black; padding:10px; text-align:center; text-decoration:none; ">   <b> HOME PAGE </b> </a> </div> </td>
+<td> <div style=" background-color:#e6b800; color:black; padding:10px; text-align:center; text-decoration:none;">   <b> PRODUCTS </b> </a> </div> </td>
+<td> <div style=" background-color:#e6b800; color:black; padding:10px; text-align:center; text-decoration:none;">   <b> SERVICES  </b> </a> </div> </td>
+<td> <div style=" background-color:#e6b800; color:black; padding:10px; text-align:center; text-decoration:none;">  <b> CONTACT </b> </a> </div> </td>
+
+</tr>
+
+</table>
+
+    
+          
+            <%  
+       String Employee_ID = request.getParameter("Employee_ID");
+    String Vehicle_ID = request.getParameter("Vehicle_ID");
+    String Vehicle_mileage = request.getParameter("Vehicle_mileage");
+    String Price_per_gallon = request.getParameter("Price_per_gallon");
+    String Total_purchase_price = request.getParameter("Total_purchase_price"); 
+    String Number_of_gallons_purchased = request.getParameter("Number_of_gallons_purchased");
+    String Picture_of_odometer = request.getParameter("Picture_of_odometer");
+    String Picture_of_Receipt = request.getParameter("Picture_of_Receipt");
+    String Uploaded_at = request.getParameter("Uploaded_at");
+    
+           
+      Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yhdw",
+            "root", "pwd");
+    
+    Statement st = con.createStatement();
+    ResultSet rs = st.executeQuery("SELECT * FROM gasreceipt order by Uploaded_at desc");	
+         //executes the query and stores the result in resultset 'rs'
+            
+            %>
+      </head>
+      <body>
+            <div style="position: absolute; width: 50px; height: 28px; z-index: 3; left: 1000px; top: 350px" >
+                <font face="Arial Narrow" size="2">
+                    <b><font color="#00AE2C"><a href="javascript:history.back()">
+                    <font color="#000000"></font></a></font></b>
+                </font>
+            </div>
+            <div align="center"  >
+                <font color="#A60000"> <u><b><font face="Poor Richard"
+	size="5">Gasreceipt details</font></b></u> </font>
+            </div>
+            <br>
+            <div align="center" >
+            <table width="650" border="2">
+                <tr>
+                    <td width="180" align="center">
+					<b><font face="Verdana" color="blue" size="2">Employee_ID</font></b></td>
+					<td align="center">
+					<b>
+					<font face="Verdana" color="blue" size="2">Vehicle_ID</font></b></td>
+                    <td align="center">
+					<b>
+					<font face="Verdana" color="blue" size="2">Vehicle_mileage</font></b></td>
+                                         <td align="center">
+					<b>
+					<font face="Verdana" color="blue" size="2">Price_per_gallon</font></b></td>
+                                         <td align="center">
+					<b>
+					<font face="Verdana" color="blue" size="2">Total_purchase_price</font></b></td>
+                                         <td align="center">
+					<b>
+					<font face="Verdana" color="blue" size="2">Number_of_gallons_purchased</font></b></td>
+                    <td align="center">
+                        
+					<b>
+					<font face="Verdana" color="blue" size="2">Picture_of_odometer</font></b></td>
+					
+					<td align="center">
+					<b>
+					<font face="Verdana" color="blue"  size="2">Picture_of_Receipt</font>
+                                        <td align="center">
+                                        <b>
+                                        <font face="Verdana" color="blue" size="2">Uploaded_at</font></b></td>
+					
+                                        
+                </tr>
+            <%
+            while(rs.next())
+            {
+            	Employee_ID = rs.getString(1); //gets the output values from the executed query
+            	Vehicle_ID = rs.getString(2);
+                Vehicle_mileage=rs.getString(3);
+              	Price_per_gallon= rs.getString(4);
+              	Total_purchase_price =rs.getString(5);
+                Number_of_gallons_purchased=rs.getString(6);
+                
+                Picture_of_odometer=rs.getString("Picture_of_odometer");
+                Picture_of_Receipt=rs.getString("Picture_of_Receipt");
+                Uploaded_at=rs.getString(9);
+            
+            
+   
+            %>
+            <tr>
+                 <td width="150" align="center">
+				<font color="black" face="Verdana" size="2"><b> <%=Employee_ID%></font></td>
+                                 <td width="150" align="center">
+				<font color="black" face="Verdana" size="2"><b> <%=Vehicle_ID%></font></td>
+                                 <td width="150" align="center">
+				<font color="black" face="Verdana" size="2"><b> <%=Vehicle_mileage%></font></td>
+                <td width="150" align="center">
+				<font color="black" face="Verdana" size="2"><b> <%=Price_per_gallon%></font></td>
+				<td  align="center">
+				<font color="black" face="Verdana" size="2"><b> <%=Total_purchase_price%></font></td>
+                <td  align="center">
+				<font color="black" face="Verdana" size="2"> <b> <%=Number_of_gallons_purchased%></font></td>  
+				<td  align="center">
+				<img src="<%=Picture_of_odometer%>" width="200" height="200"/></td>
+				           
+                <td align="center">
+                   <img src="<%=Picture_of_Receipt%>" width="200" height="200"/></td>            
+                <td align="center"> 
+                    <font color="black" face="Verdana" size="2"> <b> <%=Uploaded_at%></font></td>            
+            
+                </tr>
+            <%
+            }
+            %>
+            </table>
+            
+            <br>
+            
+            <div align="center" > <table>
+                    <tr> <td>
+       <div font-size="3" align="left"><a style="text-decoration: none; color:blue; " href="yhhtml.jsp"> <b> <u> Add New Bills</a> </div> </td>
+                       <td>
+                       <td> <br> </td> 
+                   </tr> </table> </div>
+        	
+&nbsp;</div>
+       
+    
+    </body>
+    
+</html>
